@@ -1,0 +1,270 @@
+#include <iostream>
+using namespace std;
+
+void displayDailyCollection(float dailyCollection);
+float calcDailyCollection(float dailyCollection , float totalPrice);
+void display();
+void displayMenu(int set,int order);
+void displayGst(float gst, float normalPrice);
+float calcGST(float gst,float normalPrice , float totalPrice);
+float calcNormalPrice(int set,int qtty,float normalPrice,int order);
+int main()
+{
+   char firstName[50],lastName[50],ic[20];
+   int age , order , qtty , set ;
+   float gst , selection , dailyCollection = 0;
+   
+  
+	cout<< "=========================DRIVE THRU==========================";
+	cout<< "\n*************************************************************";
+	cout<< "\n************WELCOME TO OUR McDonald's BATU PAHAT*************";
+	cout<< "\n*************************************************************";
+	cout<< "\n========================I M LOVIN IT=========================";
+   	cout<<"\n**************************************************************\n";
+   	cout<<"\nPlease enter your choice : \n";
+	cout<<"1 = Proceed\n";
+   	cout<<"0 = Exit\n";
+   	cin>>selection;
+   	system("cls");
+
+
+ 	while(selection != 0)
+ 	{
+ 		cout<<"****************************************************\n";
+		cout<<"*******************CUSTOMER ORDER*******************\n";
+		cout<<"****************************************************\n";
+   		cout<<"\nFirst Name           :";
+   		cin>>firstName;
+      	cout<<"Last Name            :";
+      	cin>>lastName;
+   		cout<<"IC                   :";
+   		cin>>ic;
+   		cout<<"Age		:";
+   		cin>>age;
+		cout<<"Choice your set      :   1)NORMAL SET     2)FAMILY SET  : "; 
+		cin>>order ;
+		cout<<"\n****************************************************\n";
+		cout<<"****************************************************\n";
+		cout<<"****************************************************\n";
+		
+		system("cls");
+		 
+			cout<<endl;
+			cout<<endl;
+			if ( order == 1 )
+			{ 
+				cout << "============================MENU OF NORMAL SET=========================\n\n" ;
+				cout << "    SET 1 : Bic Mac , Fries and soft drink                - RM 5.88\n";
+				cout << "    SET 2 : Double Cheese Burger , Fries and Soft Drink   - RM 7.30\n";
+				cout << "    SET 3 : Quarter Pounder Burger , Fries and soft drink - RM 8.40\n";
+				cout << "    SET 4 : Beef Foldover , Fries and soft drink          - RM 9.70\n";		 
+				cout << "\n=====================================================================\n\n" ;
+			}
+	
+			else if ( order == 2 )
+			{
+				cout << "=============================================================MENU OF FAMILY SET============================================================\n\n" ;
+				cout << "\t\tSET 1 : Special Big Mac , Special Fries and soft drink , Double Cheese Burger                            - RM 20.90\n ";
+				cout << "\t\tSET 2 : Special Quarter Pounder Burger , Special Beef Foldover , Special Big Mac , Fries and soft drink  - RM 31.50\n ";
+				cout << "\n=========================================================================================================================================\n\n" ;
+			}
+		cout<<endl;	
+		cout<<endl;
+		cout<<"ENTER YOUR SET  : ";
+		cin>> set ; 
+		cout<<"ENTER QUANTITY  : ";
+		cin>>qtty;
+		
+		float normalPrice = 0;
+	    normalPrice =  calcNormalPrice(set,qtty,normalPrice,order);
+	    
+	    float totalPrice = 0 ;
+	    totalPrice = calcGST( gst, normalPrice , totalPrice);
+		 
+
+		dailyCollection = calcDailyCollection( dailyCollection , totalPrice);
+		system("cls"); 
+		cout<<endl;
+		cout<<endl;
+		
+		cout<<"----------------------------------------------------------------------------------------------------------------\n";
+		cout<<"***********************************************CUSTOMER DETAILS*************************************************\n";
+		cout<<"----------------------------------------------------------------------------------------------------------------\n";
+
+		cout<<"\nName				: "<<firstName<<" "<<lastName<<'\n';
+    	cout<<"IC Number			: "<<ic<<'\n';
+     	cout<<"Age				: "<<age<<'\n';
+
+   		if(ic[11]%2==0)
+         	cout<<"Gender				: Female";
+
+    	else
+        	cout<<"Gender				: Male";
+        	cout<<endl;
+     		displayMenu(set,order);
+      		cout<<"Quantity			: "<<qtty<<'\n';
+      		cout<<"Price				: RM "<<normalPrice<<'\n';
+      		displayGst( gst,normalPrice);
+      		cout<<"Total Price			: RM "<<totalPrice<<'\n';
+
+		cout<<"****************************************************************************************************************\n";
+		cout<<"****************************************************************************************************************\n";
+		cout<<"****************************************************************************************************************\n";
+
+		
+		cout<<endl;
+		cout<<endl;
+		cout<<endl;
+		cout<<endl;
+		cout<<endl;
+		cout<<endl;
+		cout<<endl;
+		cout<<endl;
+		cout<<endl;
+
+		displayDailyCollection(dailyCollection);
+
+		cout<<endl;
+		cout<<endl;
+		cout<<endl;
+		cout<<endl;
+		cout<<endl;
+		
+		display();
+		cin>>selection;
+		system("cls");
+    }
+    
+    
+	
+	cin.get() ; 
+	cin.get() ;
+	return 0 ;
+}
+
+float calcNormalPrice(int set,int qtty,float normalPrice , int order)
+{
+		if(order == 1)
+		{
+			if( set == 1)
+			{
+				normalPrice = 5.88 * qtty ;
+			
+			}
+			else if ( set == 2)
+			{
+				normalPrice = 7.30 * qtty ;
+			
+			}
+			else if ( set == 3)
+			{
+				normalPrice = 8.40 * qtty ;
+			
+			}
+			else if ( set == 4)
+			{
+				normalPrice = 9.70 * qtty ;
+			
+			}
+		}
+		
+     	if(order == 2)
+		{
+			if( set == 1)
+			{
+				normalPrice = 20.90 * qtty ;
+			
+			}
+			else if ( set == 2)
+			{
+				normalPrice = 31.50 * qtty ;
+		    }
+			
+		}
+		
+			return normalPrice;
+			
+}
+
+float calcGST(float gst,float normalPrice , float totalPrice)
+{
+	gst = normalPrice*0.06; ; 
+	totalPrice = gst + normalPrice ;
+	
+	return totalPrice ; 
+}
+
+
+
+void displayGst(float gst,float normalPrice)
+{
+	gst=normalPrice*0.06;
+	cout<<"\nGst				: RM "<<gst<<'\n';
+	
+}
+
+void displayMenu(int set , int order)
+{
+	if(order ==1)
+	{
+		if( set == 1)
+			{
+				cout << "\nYour order\t\t\t: SET 1 : Bic Mac , Fries and soft drink \n";
+			
+			}
+			else if ( set == 2)
+			{
+				cout << "\nYour order\t\t\t: SET 2 : Double Cheese Burger , Fries and Soft Drink   - RM 7.30\n";
+			
+			}
+			else if ( set == 3)
+			{
+				cout << "\nYour order\t\t\t: SET 3 : Quarter Pounder Burger , Fries and soft drink - RM 8.40\n";
+			
+			}
+			else if ( set == 4)
+			{
+				cout << "\nYour order\t\t\t: SET 4 : Beef Foldover , Fries and soft drink          - RM 9.70\n";
+			 
+			}
+    }
+    
+    if(order ==2)
+	{
+			if( set == 1)
+			{
+				cout << "\nYour order\t\t\t: SET 1 : Special Big Mac , Special Fries and soft drink , Double Cheese Burger   - RM 20.90\n";
+			
+			}
+			else if ( set == 2)
+			{
+				cout << "\nYour order\t\t\t: SET 2 : Special Quarter Pounder Burger , Special Beef Foldover , Special Big Mac , Fries and soft drink  - RM 31.50\n" ;
+			
+			}
+    }		
+}
+
+float calcDailyCollection(float dailyCollection , float totalPrice)
+{
+	dailyCollection = dailyCollection + totalPrice ;
+	return dailyCollection ;
+}
+
+void displayDailyCollection(float dailyCollection)
+{
+	cout<<"-----------------------------------------------------\n";
+	cout<<"*******************COMPANY DETAILS******************\n";
+	cout<<"-----------------------------------------------------\n";
+	cout <<"\nIncome daily         	:"<<dailyCollection<<'\n';
+	cout<<"\n-----------------------------------------------------\n";
+	cout<<"******************************************************\n";
+	cout<<"-----------------------------------------------------\n";
+		
+	
+}
+
+void display()
+{
+	  cout<<"\nPress 1 to order next customer";
+      cout<<"\nPress 0 to exit\n" ;
+}
